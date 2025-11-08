@@ -1,0 +1,19 @@
+def longestValidParentheses(s: str) -> int:
+    stack = [-1]  # Initialize stack with -1 to handle base index
+    max_len = 0
+
+    for i, char in enumerate(s):
+        if char == '(':
+            stack.append(i)
+        else:
+            stack.pop()
+            if not stack:
+                stack.append(i)  # Push current index as a new base
+            else:
+                max_len = max(max_len, i - stack[-1])
+
+    return max_len
+
+# Example
+s = "(()"
+print(longestValidParentheses(s))  # Output: 2
